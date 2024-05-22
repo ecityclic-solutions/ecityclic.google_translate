@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layers>
+  <layer
+      name="ecityclic.google_translate"
+      interface="ecityclic.google_translate.interfaces.IEcityclicGoogleTranslateLayer"
+      />
+</layers>

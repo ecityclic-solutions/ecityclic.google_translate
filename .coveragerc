@@ -1,0 +1,6 @@
+[report]
+include =
+    src/ecityclic/*
+omit =
+    */test*
+    */upgrades/*
