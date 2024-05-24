@@ -1,0 +1,16 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:cache="http://namespaces.zope.org/cache"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:zcml="http://namespaces.zope.org/zcml">
+
+    <plone:service
+        method="POST"
+        factory=".google_translate.GoogleTranslatePost"
+        for="zope.interface.Interface"
+        permission="zope2.View"
+        name="@google_translate"
+        layer="ecityclic.google_translate.interfaces.IEcityclicGoogleTranslateLayer"
+        />
+
+</configure>
