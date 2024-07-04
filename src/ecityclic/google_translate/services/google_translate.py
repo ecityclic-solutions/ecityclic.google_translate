@@ -31,6 +31,7 @@ class GoogleTranslatePost(Service):
         if isinstance(translate_text, list):
             return self.translate_list(API_KEY, source_lang, target_lang, translate_text)
 
+        translate_text = translate_text.replace('\xa0', ' ')
         data = {
             'key': API_KEY,
             'source': source_lang,
