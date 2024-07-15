@@ -16,6 +16,7 @@ class GoogleTranslatePost(Service):
     URL = 'https://www.googleapis.com/language/translate/v2'
 
     def reply(self):
+        self.error = False
         data = json_body(self.request)
         translate_text = data.get('translate_text', None)
         source_lang = data.get('source_lang', None)
@@ -25,6 +26,9 @@ class GoogleTranslatePost(Service):
 
         API_KEY = api.portal.get_registry_record('plone.google_translation_key')
         translated = self.translate(API_KEY, source_lang, target_lang, translate_text)
+        if self.error:
+            return {'translated_text': {'error': 'no_more_quota'}}
+
         return {'translated_text': translated}
 
     def translate(self, API_KEY, source_lang, target_lang, translate_text):
@@ -44,6 +48,7 @@ class GoogleTranslatePost(Service):
         try:
             r = urllib.request.urlopen(req, timeout=10)
         except Exception as e:  # noqa
+            self.error = True
             return {'error': 'no_more_quota'}
 
         translated = json.loads(r.read())['data']['translations'][0]['translatedText']
